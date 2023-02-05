@@ -5,7 +5,7 @@ export const myUser = createContext({});
 
 export const Context = (props) => {
     const [userObject,setUserObject] = useState();
-    const [loading,setLoading] = useState(true);
+    // const [loading,setLoading] = useState(true);
     
     useEffect(() => {
         axios.get("http://localhost:3001/api/auth/getUser",{withCredentials: true})
@@ -13,7 +13,6 @@ export const Context = (props) => {
             if (user.data) {
                 setUserObject(user.data)
             }
-            setLoading(false)
         })
         .catch(err => console.log("ERROR: ",err))
     },[])

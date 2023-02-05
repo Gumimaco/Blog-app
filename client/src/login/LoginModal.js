@@ -1,6 +1,7 @@
 import React,{useState} from 'react'
 import axios from 'axios'
 import { useNavigate } from 'react-router-dom';
+import GoogleAuth from './GoogleAuth';
 
 function LoginModal(props) {
     const { logModal, regModal } = props
@@ -32,6 +33,7 @@ function LoginModal(props) {
                 <div className="login">
                     <h1>Login</h1>
                 </div>
+                <GoogleAuth/>
                 <form onSubmit={handleSubmit}>
                     <label htmlFor="email">Email:</label>
                     <input

@@ -28,18 +28,29 @@ router.post('/register',async (req,res) => {
     }
 })
 
+
+router.get('/google', passport.authenticate('google', { scope: ['email','profile'] }));
+
+router.get('/google/callback', 
+  passport.authenticate('google', { failureRedirect: '/login' }),
+  function(req, res) {
+    // Successful authentication, redirect home.
+    console.log("Success redirecting to home_PAGE")
+    res.redirect('http://localhost:3000');
+});
+
 router.get("/getUser",(req,res) => {
     // here check some logic if he exists or not and retrieve relevant info we need
     res.send(req.user);
 })
 
-router.get("/logout",(req,res) => {
+router.delete("/logout",(req,res) => {
     console.log("Logging out")
     if (req.user) {
         req.logout((err) => {
             return err;
         });
-        res.send("done");
+        // res.sendStatus(200);
     }
 })
 

@@ -53,7 +53,7 @@ function RegisterModal(props) {
                 </form>
                 </div>
                 <div className="footer">
-                    Already blogger? <a onClick={() => {regModal(false);logModal(true)}}>Register</a>
+                    Already blogger? <a onClick={() => {regModal(false);logModal(true)}}>Login</a>
                 </div>  
             </div>
         </div>

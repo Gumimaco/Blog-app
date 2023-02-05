@@ -14,7 +14,7 @@ export const Navbar = (props) => {
 
 
     const logout = () => {
-        axios.get('http://localhost:3001/api/auth/logout',{withCredentials: true})
+        axios.delete('http://localhost:3001/api/auth/logout',{withCredentials: true}).then(data => console.log("DONE"))
     }
 
     const {user} = props

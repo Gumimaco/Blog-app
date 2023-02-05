@@ -28,6 +28,7 @@ app.use(
 app.use(passport.initialize())
 app.use(passport.session())
 require('./strategies/Local')
+require('./strategies/Google')
 
 
 app.use('/api/auth',authRoute)
