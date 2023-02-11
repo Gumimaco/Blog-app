@@ -14,7 +14,7 @@ export const UploadImage = (props) => {
         if (!File) return;
         const form = new FormData();
         form.append("image", File);
-        await axios.post("http://localhost:3001/api/images/upload",form,{withCredentials: true})
+        await axios.post("http://localhost:3001/api/image/upload",form,{withCredentials: true})
         .then(data => {setUrl(data.data)})
         .catch(error => console.log(error))
         console.log(url)

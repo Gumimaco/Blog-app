@@ -16,7 +16,6 @@ const DraftSchema = new mongoose.Schema({
     },
     tags: {
         type: [mongoose.SchemaTypes.String],
-        required: true,
         default: []
     },
     content: {

@@ -2,8 +2,7 @@ const mongoose = require('mongoose')
 
 const UserSchema = new mongoose.Schema({
     password: {
-        type: mongoose.SchemaTypes.String,
-        required: true
+        type: mongoose.SchemaTypes.String
     },
     email: {
         type: mongoose.SchemaTypes.String,
@@ -14,5 +13,19 @@ const UserSchema = new mongoose.Schema({
         required: true,
         default: new Date()
     },
+    isGoogle: {
+        type: mongoose.SchemaTypes.Boolean,
+        required: true,
+        default: false
+    },
+    username: {
+        type: mongoose.SchemaTypes.String,
+    },
+    profile_picture: {
+        type: mongoose.SchemaTypes.String
+    },
+    description: {
+        type: mongoose.SchemaTypes.String
+    }
 })
 module.exports = mongoose.model("users",UserSchema)

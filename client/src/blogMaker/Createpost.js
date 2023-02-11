@@ -32,18 +32,20 @@ export default function Createpost() {
         .catch(fail => console.log("FAILED"))
     }
 
-
-    const submit = () => {
+    const redirect_to_blog = (url) => {
+        window.location.assign(`http://localhost:3000/blog/${url}`)
+    }
+    const submit = async () => {
         if (textArea.length < 30 || title.length < 5) return;
         let url;
-        axios.post('http://localhost:3001/api/blog/create-post',{textArea,tags,title},{withCredentials: true})
+        await axios.post('http://localhost:3001/api/blog/create-post',{textArea,tags,title},{withCredentials: true})
         .then(data => {
-            url = data.data.id
+            url = data.data._id
         })
-        axios.delete(`http://localhost:3001/api/blog/delete-draft/${id}`,{withCredentials: true})
+        await axios.delete(`http://localhost:3001/api/blog/delete-draft/${id}`,{withCredentials: true})
         .then(something => {console.log("SUCCESS DELETING DRAFT")})
         .catch(err => console.log("ERROR DELETING DRAFT"))
-        console.log("REDIRECT HERE TO THIS URL",url)
+        redirect_to_blog(url)
     }
     return (
         
@@ -53,7 +55,7 @@ export default function Createpost() {
                     <div className="w-4/6">
                         { preview ? <PreviewComponent data={textArea} tags={tags} edit={setPreview} title={title}/> :
                         <div className="h-screen">
-                                <input type="text" className="text-4xl font-bold" placeholder="Title" onChange={e => setTitle(e.target.value)} value={title}></input>
+                                <input type="text" className="text-4xl font-bold flex-wrap" placeholder="Title" onChange={e => setTitle(e.target.value)} value={title}></input>
 
                                 <AddTags tags={tags} setTag={setTags}/>
                                 <textarea placeholder="Write your text here" className="bg-gray-200 blog-content w-full h-5/6 rounded-sm p-2" onChange={e => settextArea(e.target.value)} value={textArea}></textarea>

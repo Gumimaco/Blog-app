@@ -5,20 +5,14 @@ const Draft = require('../database/models/DraftBlog')
 const router = Router()
 
 const is_authenticated = (req,res,next) => {
-    console.log("authenticating")
-    if (req.user) {
-        console.log("USER FOUND")
-        next()
-    }
-    else {
-        res.sendStatus(401)
-    }
+    if (req.user) next()
+    else res.sendStatus(401)
 }
 
 router.post('/create-post',is_authenticated, async (req,res) => {
     const {tags,textArea,title} = req.body
     // check if succesfull later too boring for now 
-    const blog = await Blog.create({title: title,c_email: req.user.email, creator: req.user.id, tags,content: textArea})
+    const blog = await Blog.create({title: title,createdAt: new Date(),c_email: req.user.email, creator: req.user.id, tags,content: textArea})
     res.send(blog)
 })
 
@@ -51,7 +45,7 @@ router.get('/last-draft',is_authenticated,async (req,res) => {
 router.get('/draft/:id',is_authenticated, async (req,res) => {
     const draft_id = req.params.id
     draft = await Draft.findOne({_id: draft_id})
-    if (draft.creator !== req.user.id) {
+    if (!draft || draft.creator !== req.user.id) {
         res.sendStatus(400)
     } else {
         res.send(draft)

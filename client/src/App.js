@@ -4,6 +4,8 @@ import {useContext} from 'react'
 import {myUser} from './context/UserContext'
 import {Home} from './home/Home'
 import Createpost from './blogMaker/Createpost';
+import UserSettings from './user/UserSettings';
+import UserViewer from './user/UserViewer';
 
 
 function App() {
@@ -18,9 +20,11 @@ function App() {
                     { user ?
                         <>
                             <Route path="/:id/edit-post" element={<Createpost/>}/>
+                            <Route path="/user/settings" element={<UserSettings user={user}/>}/>
                         </>
                         : null
                     }
+                    <Route path="/user/:id" element={<UserViewer user={user}/>}/>
                 </Routes>
             </BrowserRouter>
         </>

@@ -14,10 +14,21 @@ const configS3 = {
 AWS.config.update(configS3);
 const s3 = new AWS.S3()
 
+const keyToURL = async (key) => {
+    const url = await s3.getSignedUrl("getObject",{
+        Bucket: "blog-article-images",
+        Key: key,
+        Expires: 604800
+    })
+    return url;
+}
+
+
 const uploadToDO = async ({file,userId}) => {
     // we can also use instead of article-images userId but
     // not preffered for this style of app
-    const key = `article-images/${uuidv4()}`
+    const randomness = uuidv4()
+    const key = `article-images/${randomness}`
     await s3.putObject({
         Bucket: "blog-article-images",
         Key: key,
@@ -25,11 +36,7 @@ const uploadToDO = async ({file,userId}) => {
         ACL: 'public-read',
         ContentType: file.mimetype
     },(err,data) => {err ? console.log("ERROR",err) : console.log("UPLOADED")})
-    const url = await s3.getSignedUrl("getObject",{
-        Bucket: "blog-article-images",
-        Key: key
-    })
-    return url
+    return randomness
 }
 const is_authenticated = (req,res,next) => {
     if (req.user) next()
@@ -47,6 +54,12 @@ router.post('/upload',is_authenticated,upload.single("image"), async (req,res) =
     if (!file || !userId) res.sendStatus(400);
     const url = await uploadToDO({file,userId})
     res.send(url)
+})
+
+router.get('/url/:key', async (req,res) => {
+    const {key} = req.params
+    let result = await keyToURL(`article-images/${key}`)
+    res.send(result)
 })
 
 module.exports = router

@@ -34,7 +34,7 @@ function LoginModal(props) {
                     <h1>Login</h1>
                 </div>
                 <GoogleAuth/>
-                <form onSubmit={handleSubmit}>
+                {/* <form onSubmit={handleSubmit}>
                     <label htmlFor="email">Email:</label>
                     <input
                         type="email"
@@ -56,7 +56,7 @@ function LoginModal(props) {
                 </div>
                 <div className="footer">
                     New blogger? <a onClick={() => {logModal(false);regModal(true)}}>Create account</a>
-                </div>  
+                </div>   */}
             </div>
         </div>
     )

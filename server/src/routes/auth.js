@@ -5,28 +5,27 @@ const {hashPassword} = require('../utils/Hash_utils')
 
 const router = Router()
 
-router.post('/login',passport.authenticate('local'),(req,res) => {
-    console.log("Login user",req.user);
-    if (!req.user) {
-        console.log("Unathorized")
-    }
-    res.send(200);
-})
+// router.post('/login',passport.authenticate('local'),(req,res) => {
+//     if (!req.user) {
+//         res.sendStatus(400)
+//     }
+//     res.sendStatus(200);
+// })
 
-router.post('/register',async (req,res) => {
-    const { email } = req.body;
-    console.log("EMAIL,PASS: ",email,req.body.password)
-    const userDB = await User.findOne({email});
-    if (userDB) {
-        console.log("Exists")
-        res.status(400).send("Already exists");
-    } else {
-        const password = hashPassword(req.body.password);
-        // creates the new user
-        const newUser = await User.create({email,password});
-        res.sendStatus(201)
-    }
-})
+// router.post('/register',async (req,res) => {
+//     const { email } = req.body;
+//     // console.log("EMAIL,PASS: ",email,req.body.password)
+//     const userDB = await User.findOne({email});
+//     if (userDB) {
+//         console.log("Exists")
+//         res.status(400).send("Already exists");
+//     } else {
+//         const password = hashPassword(req.body.password);
+//         // creates the new user
+//         const newUser = await User.create({email,password});
+//         res.sendStatus(201)
+//     }
+// })
 
 
 router.get('/google', passport.authenticate('google', { scope: ['email','profile'] }));
