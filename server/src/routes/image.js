@@ -2,12 +2,13 @@ const multer = require('multer')
 const {Router} = require("express")
 const AWS = require('aws-sdk')
 const { v4: uuidv4 } = require('uuid');
+require('dotenv').config()
 
 const configS3 = {
-    endpoint: "fra1.digitaloceanspaces.com",
-    region: "fra1",
-    accessKeyId: "DO002XAAHTPRLQTF6BVV",
-    secretAccessKey: "e2K3bl16Rg/YAGbHAGBs3ej9W0wY6m/L1TVSdAMtW+k",
+    endpoint: process.env.DO_ENDPOINT,
+    region: process.env.DO_REGION,
+    accessKeyId: process.env.DO_ACCESS_KEY,
+    secretAccessKey: process.env.DO_SECRET_ACCESS,
 }
 
 AWS.config.update(configS3);
