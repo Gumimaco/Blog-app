@@ -9,6 +9,8 @@ require('./database/Connect')
 
 const app = express()
 const authRoute = require('./routes/auth')
+const blogRoute = require('./routes/blog')
+const imageRoute = require('./routes/image')
 const PORT = 3001
 
 app.use(cors({origin: "http://localhost:3000",credentials: true}))
@@ -32,7 +34,8 @@ require('./strategies/Google')
 
 
 app.use('/api/auth',authRoute)
-
+app.use('/api/blog',blogRoute)
+app.use('/api/images',imageRoute)
 app.listen(PORT,() => {
     console.log(`Listening on ${PORT}`)
 })

@@ -1,13 +1,9 @@
 const mongoose = require('mongoose')
 
-const BlogSchema = new mongoose.Schema({
+const DraftSchema = new mongoose.Schema({
     title: {
         type: mongoose.SchemaTypes.String,
-        required: true
-    },
-    c_email: {
-        type: mongoose.SchemaTypes.String,
-        required: true
+        default: ""
     },
     creator: {
         type: mongoose.SchemaTypes.String,
@@ -18,18 +14,14 @@ const BlogSchema = new mongoose.Schema({
         required: true,
         default: new Date()
     },
-    upvoted: {
-        type: mongoose.SchemaTypes.Number,
-        required: true,
-        default: 0
-    },
     tags: {
         type: [mongoose.SchemaTypes.String],
-        required: true
+        required: true,
+        default: []
     },
     content: {
-        type: [],
-        required: true
-    },
+        type: mongoose.SchemaTypes.String,
+        default: ""
+    }
 })
-module.exports = mongoose.model("blogs",BlogSchema)
+module.exports = mongoose.model("drafts",DraftSchema)
