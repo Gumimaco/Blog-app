@@ -12,6 +12,8 @@ export default function Createpost() {
     const [textArea, settextArea] = useState("")
     const [preview,setPreview] = useState(false)
     const [access,setAccess] = useState(false)
+    const [url, setUrl] = useState(null)
+
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -47,6 +49,26 @@ export default function Createpost() {
         .catch(err => console.log("ERROR DELETING DRAFT"))
         redirect_to_blog(url)
     }
+    const onFileChange = async (e) => {
+        let file = e.currentTarget.files?.[0]
+        e.preventDefault();
+        if (!file) return;
+        const form = new FormData();
+        form.append("image", file);
+        let image_key;
+        await axios.post("http://localhost:3001/api/image/upload",form,{withCredentials: true})
+        .then(data => {image_key = data.data})
+        .catch(error => console.log(error))
+        let blog_content = document.getElementById('blog-content')
+        let text = `![name](${image_key})`
+        blog_content.setRangeText(
+            text+'\n',
+            blog_content.selectionStart,
+            blog_content.selectionEnd,
+            'end'
+        )
+        settextArea(blog_content.value)
+    }
     return (
         
         <div className="wrapper mt-1 flex justify-center">
@@ -56,9 +78,11 @@ export default function Createpost() {
                         { preview ? <PreviewComponent data={textArea} tags={tags} edit={setPreview} title={title}/> :
                         <div className="h-screen">
                                 <input type="text" className="text-4xl font-bold flex-wrap" placeholder="Title" onChange={e => setTitle(e.target.value)} value={title}></input>
-
                                 <AddTags tags={tags} setTag={setTags}/>
-                                <textarea placeholder="Write your text here" className="bg-gray-200 blog-content w-full h-5/6 rounded-sm p-2" onChange={e => settextArea(e.target.value)} value={textArea}></textarea>
+                                <div>
+                                <input onChange={onFileChange} type="file"></input>
+                                </div>
+                                <textarea id="blog-content" placeholder="Write your text here" className="bg-gray-200 blog-content w-full h-5/6 rounded-sm p-2" onChange={e => settextArea(e.target.value)} value={textArea}></textarea>
                                 <div>
                                     <button className="border-blue-300 border hover:bg-blue-200 px-2 rounded-sm text-xl" onClick={() => submit(id)}>Post</button>
                                     <button className="border-blue-300 border hover:bg-blue-200 px-2 ml-2 rounded-sm text-xl" onClick={() => {setPreview(true);updateDraft()}}>Preview</button>

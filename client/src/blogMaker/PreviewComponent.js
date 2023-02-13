@@ -1,6 +1,7 @@
 import React,{useState,useEffect} from "react"
 import SyntaxHighlighter from 'react-syntax-highlighter';
 import { atomOneDarkReasonable} from 'react-syntax-highlighter/dist/esm/styles/hljs';
+import GetImage from "../hooks/GetImage";
 
 const getFinal = (string) => {
     let text_content = {type: "text",text: ""}
@@ -11,7 +12,6 @@ const getFinal = (string) => {
     let output = []
     let status = "Text"
     let reg;
-
     let i = 0;
     while (i < string.length) {
         let char = string[i]
@@ -168,10 +168,12 @@ const getFinal = (string) => {
 
 const PreviewComponent = ({data,tags,edit,title}) => {
     const [parsed,setParsed] = useState(null);
+
     useEffect(() => {
         setParsed(getFinal(data + '\n'))
         console.log(parsed)
     },[])
+
     return (
         <div>
             <h1 className="text-4xl font-bold ">{title}</h1>
@@ -190,7 +192,7 @@ const PreviewComponent = ({data,tags,edit,title}) => {
                             case "text":
                                 return <p key={index+5}>{obj.text}</p>
                             case "image":
-                                return <img key={index+5} src={obj.link} alt={obj.info}/>
+                                return <GetImage classes={"h-48"} image={obj.link} key={index+5} alt={obj.info}/>
                             case "ahref":
                                 return <a key={index+5} href={obj.link} alt={obj.info}>{obj.info}</a>
                             case "code":
