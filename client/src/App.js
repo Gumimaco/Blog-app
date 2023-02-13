@@ -6,6 +6,7 @@ import {Home} from './home/Home'
 import Createpost from './blogMaker/Createpost';
 import UserSettings from './user/UserSettings';
 import UserViewer from './user/UserViewer';
+import BlogViewer from './blog/BlogViewer';
 
 
 function App() {
@@ -25,6 +26,7 @@ function App() {
                         : null
                     }
                     <Route path="/user/:id" element={<UserViewer user={user}/>}/>
+                    <Route path="/blog/:blog_id" element={<BlogViewer user={user}/>}/>
                 </Routes>
             </BrowserRouter>
         </>

@@ -63,5 +63,18 @@ router.put('/draft/:id',is_authenticated, async (req,res) => {
     }
 })
 
+router.get('/:id', async (req,res) => {
+    const {id} = req.params
+    const blog = await Blog.findOne({_id: id})
+    console.log(blog)
+    res.send(blog)
+})
+router.get('/userblogs/:id',async (req,res) => {
+    const {id} = req.params
+    console.log("LIGHTSKIN")
+    const blogs = await Blogs.find({creator: id})
+    console.log(blogs)
+    res.sendStatus(201)
+})
 
 module.exports = router

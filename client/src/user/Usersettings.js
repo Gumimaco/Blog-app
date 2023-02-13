@@ -1,5 +1,6 @@
-import React,{useState} from "react"
+import React,{Profiler, useState} from "react"
 import axios from 'axios'
+import GetImage from "../hooks/GetImage"
 
 const UserSettings = ({user}) => {
     const [File, setFile] = useState(null)
@@ -40,7 +41,7 @@ const UserSettings = ({user}) => {
     return (
         <div>
             <div className="flex items-center">
-                <img className="profile-picture max-h-24" src={user.profile_picture}/>
+                <GetImage classes={"profile-picture max-h-24"} image={user.profile_picture}/>
                 <input onChange={onFileChange} type="file"></input>
             </div>
             <div className="flex">

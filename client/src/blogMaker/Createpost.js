@@ -60,7 +60,7 @@ export default function Createpost() {
         .then(data => {image_key = data.data})
         .catch(error => console.log(error))
         let blog_content = document.getElementById('blog-content')
-        let text = `![name](${image_key})`
+        let text = `![GiveName](${image_key})`
         blog_content.setRangeText(
             text+'\n',
             blog_content.selectionStart,

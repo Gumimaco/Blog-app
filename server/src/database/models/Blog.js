@@ -28,7 +28,7 @@ const BlogSchema = new mongoose.Schema({
         required: true
     },
     content: {
-        type: [],
+        type: mongoose.SchemaTypes.String,
         required: true
     },
 })
