@@ -1,6 +1,9 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Flex:opsz,wght@8..144,100;8..144,300;8..144,500&display=swap');
+
+
 @layer utilities {
     .modalContainer {
         position: absolute;
@@ -16,6 +19,7 @@
     }
     body {
     position: relative;
+    background: #F5F5F5;
     } 
     .overlay {
         position: absolute;

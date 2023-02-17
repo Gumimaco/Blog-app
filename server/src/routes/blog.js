@@ -71,10 +71,8 @@ router.get('/:id', async (req,res) => {
 })
 router.get('/userblogs/:id',async (req,res) => {
     const {id} = req.params
-    console.log("LIGHTSKIN")
-    const blogs = await Blogs.find({creator: id})
-    console.log(blogs)
-    res.sendStatus(201)
+    const blogs = await Blog.find({creator: id})
+    res.send(blogs)
 })
 
 module.exports = router
