@@ -1,24 +1,16 @@
-import React,{useState,useEffect} from 'react'
-import axios from 'axios'
-import BlogCard from '../blog/BlogCard'
-export const Home = () => {
-    const [blogs,setBlogs] = useState([])
-    useEffect(() => {
-        axios.get('http://localhost:3001/api/blog/last-posts')
-        .then(data => setBlogs(data.data))
-        .catch(err => console.log(err))
-    })
+import React from 'react'
+import BlogShowcase from './BlogShowcase'
+import SearchComponent from './SearchComponent'
 
+export const Home = () => {
     return (
         <div>
-            <div>INPUT SHIT HERE</div>
+            <SearchComponent/>
             <div>FILTER SHIT SORT SHIT</div>
-            <div> BLOGS</div>
-            <div>
-                { blogs.map((blog,index) => {
-                        return <BlogCard blog={blog} key={index}/>
-                    })
-                }
+            <div className="w-screen flex justify-between">
+                <div>SOMETHINGS</div>
+                <BlogShowcase/>
+                <div>SOMETHING DIFFERET</div>
             </div>
         </div>
         

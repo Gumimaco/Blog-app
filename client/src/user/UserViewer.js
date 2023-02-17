@@ -2,18 +2,24 @@ import React,{useState,useEffect} from "react"
 import {useParams,useNavigate} from 'react-router-dom'
 import axios from 'axios'
 import GetImage from "../hooks/GetImage";
+import BlogCard from "../blog/BlogCard"
 
 const UserViewer = ({user}) => {
     const {id} = useParams()
     const [viewUser,setViewUser] = useState(null)
     const [posts,setPosts] = useState(null)
-    const navigate = useNavigate();
 
     useEffect(() => {
         axios.get(`http://localhost:3001/api/user/${id}`)
         .then(data => setViewUser(data.data))
         .catch(err => console.log("ERROR"))
-    },[])
+        
+        if (user) {
+            axios.get(`http://localhost:3001/api/blog/userblogs/${user._id}`,{withCredentials: true})
+            .then(data => setPosts(data.data))
+            .catch(err => console.log("Err getting with blog useblogs",err))
+        }
+    },[user])
 
     const redirectToSettings = () => {
         window.location.assign('http://localhost:3000/user/settings')
@@ -35,7 +41,7 @@ const UserViewer = ({user}) => {
             { posts ?
                 <div>
                     { posts.map((obj,index) => {
-                        return <div>BlogPost :)</div>
+                        return <BlogCard blog={obj} key={index} user={user}/>
                     })}
                 </div>
                 : null
