@@ -13,7 +13,7 @@ function App() {
     const user = useContext(myUser);
     console.log("User in app:", user)
     return (
-        <>
+        <div>
             <BrowserRouter>
                 <Navbar user={user}/>
                 <Routes>
@@ -29,7 +29,7 @@ function App() {
                     <Route path="/blog/:blog_id" element={<BlogViewer user={user}/>}/>
                 </Routes>
             </BrowserRouter>
-        </>
+        </div>
     );
 }
 

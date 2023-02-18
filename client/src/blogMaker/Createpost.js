@@ -70,26 +70,29 @@ export default function Createpost() {
         settextArea(blog_content.value)
     }
     return (
-        
         <div className="wrapper mt-1 flex justify-center">
             {
                 access ?
-                    <div className="w-4/6">
-                        { preview ? <PreviewComponent data={textArea} tags={tags} edit={setPreview} title={title}/> :
-                        <div className="h-screen">
-                                <input type="text" className="text-4xl font-bold flex-wrap" placeholder="Title" onChange={e => setTitle(e.target.value)} value={title}></input>
-                                <AddTags tags={tags} setTag={setTags}/>
-                                <div>
-                                <input onChange={onFileChange} type="file"></input>
-                                </div>
-                                <textarea id="blog-content" placeholder="Write your text here" className="bg-gray-200 blog-content w-full h-5/6 rounded-sm p-2" onChange={e => settextArea(e.target.value)} value={textArea}></textarea>
-                                <div>
-                                    <button className="border-blue-300 border hover:bg-blue-200 px-2 rounded-sm text-xl" onClick={() => submit(id)}>Post</button>
-                                    <button className="border-blue-300 border hover:bg-blue-200 px-2 ml-2 rounded-sm text-xl" onClick={() => {setPreview(true);updateDraft()}}>Preview</button>
-                                    <button className="border-blue-300 border hover:bg-blue-200 px-2 ml-2 rounded-sm text-xl" onClick={updateDraft}>Save</button>
-                                </div>
-                            </div>
-                        }
+                    <div className="flex flex-col standard-width">
+                            { preview 
+                                ? <PreviewComponent data={textArea} tags={tags} edit={setPreview} title={title}/> 
+                                :
+                                <>
+                                    <div className="bg-white p-4 border rounded-md h-full">
+                                        <input type="text" className="text-4xl  font-bold" placeholder="Title" onChange={e => setTitle(e.target.value)} value={title}></input>
+                                        <AddTags tags={tags} setTag={setTags}/>
+                                        <div>
+                                        <input onChange={onFileChange} type="file"></input>
+                                        </div>
+                                        <textarea id="blog-content" placeholder="Write your text here" className="textareaheight blog-content rounded-sm mt-2" onChange={e => settextArea(e.target.value)} value={textArea}></textarea>
+                                    </div>
+                                    <div className="mt-2">
+                                        <button className="custom-button" onClick={() => submit(id)}>Post</button>
+                                        <button className="custom-button ml-2" onClick={() => {setPreview(true);updateDraft()}}>Preview</button>
+                                        <button className="custom-button ml-2" onClick={updateDraft}>Save</button>
+                                    </div>
+                                </>
+                            }
                     </div>
                 : null
             }

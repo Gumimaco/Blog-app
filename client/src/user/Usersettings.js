@@ -41,7 +41,7 @@ const UserSettings = ({user}) => {
     return (
         <div>
             <div className="flex items-center">
-                <GetImage classes={"profile-picture max-h-24"} image={user.profile_picture}/>
+                <GetImage classes={"profile-picture max-h-24 w-24"} image={user.profile_picture}/>
                 <input onChange={onFileChange} type="file"></input>
             </div>
             <div className="flex">

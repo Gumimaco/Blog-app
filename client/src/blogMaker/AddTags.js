@@ -21,7 +21,7 @@ export const AddTags = (props) => {
             }
             <div className="flex">
                 {/* replace with component of tag with complex tag with cancel button to get removed from tags... */}
-                { tags.map((tag,index) => {return <div onClick={e => {setTags(tags.filter(i => i !== tag))}} key={index} className="border border-blue-300 hover:bg-red-400 mr-1 mb-1 mt-1 px-1 rounded-md">#{tag}</div>}) }
+                { tags.map((tag,index) => {return <div onClick={e => {setTags(tags.filter(i => i !== tag))}} key={index} className="border border-black font-light  hover:border-red-600 mr-1 mb-1 mt-1 px-1 rounded-md">#{tag}</div>}) }
             </div>
         </div>
     )

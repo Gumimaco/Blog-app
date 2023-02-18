@@ -1,27 +1,21 @@
-import React,{useEffect,useContext} from "react"
+import React,{useEffect,useState} from "react"
 import moment from 'moment'
-import {myUser} from '../context/UserContext'
-import GetImage from "../hooks/GetImage";
 import {UserBubble} from './UserBubble'
+import axios from 'axios'
 
-const BlogCard = ({blog}) => {
-    const user = useContext(myUser);
-
-    const upvote = () => {
-
-    }
+const BlogCard = ({blog,classes}) => {
+    const [user,setUser] = useState()
+    
     useEffect(() => {
-        if (user) {
-            console.log(user)
+        if (blog) {
+            axios.get(`http://localhost:3001/api/user/${blog.creator}`)
+            .then(data => setUser(data.data))
+            .catch(err => console.log("Error getting creator of blog"))
         }
     }, [user])
 
     return (
-       <div className="bg-white p-2 mt-2 flex rounded-sm cursor-pointer border-black hover:border-blue-600 transition ease-in duration-250  border">
-            {/* <div className="mr-6">
-                <div className="">{blog.upvoted}</div>
-                <div onClick={upvote}>UPVOTE</div>
-            </div> */}
+        <div className={`bg-white p-2 mt-2 flex rounded-md cursor-pointer hover:border-blue-600 transition ease-in duration-250 border ${classes}`}>           
             <div>
                 <div>
                     <UserBubble user={user} time={moment(new Date(blog.createdAt)).fromNow()}/>
@@ -35,7 +29,7 @@ const BlogCard = ({blog}) => {
                 </div>}
                 </div>
             </div>
-       </div>
+        </div>
     )
 };
 

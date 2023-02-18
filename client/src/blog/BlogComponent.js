@@ -175,53 +175,55 @@ const BlogComponent = ({data,tags,edit,title}) => {
     },[])
 
     return (
-        <div className="bg-gray-300 m-4 rounded-sm p-2 flex flex-col items-center">
-            <h1 className="text-4xl font-bold ">{title}</h1>
-            <div className="flex">
-                { tags ? 
-                    tags.map((obj,index) => {
-                        return <div key={index} className="border border-blue-300 mr-1 mb-1 mt-1 px-1 rounded-md">{obj}</div>
-                    })
-                : null}
-            </div>
-            { parsed ? 
-                <div> {
-                    parsed.map((obj,index) => {
-                        console.log(obj)
-                        switch(obj.type) {
-                            case "text":
-                                return <p key={index+5}>{obj.text}</p>
-                            case "image":
-                                return <GetImage classes={"h-48"} image={obj.link} key={index+5} alt={obj.info}/>
-                            case "ahref":
-                                return <a key={index+5} href={obj.link} alt={obj.info}>{obj.info}</a>
-                            case "code":
-                                return <SyntaxHighlighter
-                                key={index+5}
-                                language="javascript" 
-                                style={atomOneDarkReasonable} 
-                                className="w-96 rounded-sm">{obj.code}</SyntaxHighlighter>
-                            case "heading":
-                                switch(obj.level) {
-                                    case 1:
-                                        return <div className="text-6xl font-bold" key={index+5}>{obj.title}</div>
-                                    case 2:
-                                        return <div className="text-5xl font-bold" key={index+5}>{obj.title}</div>
-                                    case 3:
-                                        return <div className="text-4xl font-bold" key={index+5}>{obj.title}</div>
-                                    case 4:
-                                        return <div className="text-3xl font-bold" key={index+5}>{obj.title}</div>
-                                    case 5:
-                                        return <div className="text-2xl font-bold" key={index+5}>{obj.title}</div>
-                                    case 6:
-                                        return <div className="text-xl font-bold" key={index+5}>{obj.title}</div>
-                                }
-                        }
-                    })
-                    }
+        <div className="flex justify-center">
+            <div className="bg-white m-4 rounded-md p-2 flex flex-col standard-width">
+                <h1 className="text-4xl font-bold">{title}</h1>
+                <div className="flex mb-2">
+                    { tags ? 
+                        tags.map((obj,index) => {
+                            return <div key={index} className="border border-black font-light px-1 mr-2 my-1 rounded-md">{obj}</div>
+                        })
+                    : null}
                 </div>
-            : null
-            }   
+                { parsed ? 
+                    <div> {
+                        parsed.map((obj,index) => {
+                            console.log(obj)
+                            switch(obj.type) {
+                                case "text":
+                                    return <p key={index+5}>{obj.text}</p>
+                                case "image":
+                                    return <GetImage classes={"h-48"} image={obj.link} key={index+5} alt={obj.info}/>
+                                case "ahref":
+                                    return <a key={index+5} href={obj.link} alt={obj.info}>{obj.info}</a>
+                                case "code":
+                                    return <SyntaxHighlighter
+                                    key={index+5}
+                                    language="javascript" 
+                                    style={atomOneDarkReasonable} 
+                                    className="w-96 rounded-sm">{obj.code}</SyntaxHighlighter>
+                                case "heading":
+                                    switch(obj.level) {
+                                        case 1:
+                                            return <div className="text-6xl font-bold" key={index+5}>{obj.title}</div>
+                                        case 2:
+                                            return <div className="text-5xl font-bold" key={index+5}>{obj.title}</div>
+                                        case 3:
+                                            return <div className="text-4xl font-bold" key={index+5}>{obj.title}</div>
+                                        case 4:
+                                            return <div className="text-3xl font-bold" key={index+5}>{obj.title}</div>
+                                        case 5:
+                                            return <div className="text-2xl font-bold" key={index+5}>{obj.title}</div>
+                                        case 6:
+                                            return <div className="text-xl font-bold" key={index+5}>{obj.title}</div>
+                                    }
+                            }
+                        })
+                        }
+                    </div>
+                : null
+                }   
+            </div>
         </div>
     )
 };
