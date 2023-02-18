@@ -175,12 +175,13 @@ const PreviewComponent = ({data,tags,edit,title}) => {
     },[])
 
     return (
-        <div>
-            <h1 className="text-4xl font-bold ">{title}</h1>
+        <>
+        <div className="bg-white mt-1 flex flex-col p-4 justify-center rounded-md">
+            <h1 className="text-4xl font-bold">{title}</h1>
             <div className="flex">
                 { tags ? 
                     tags.map((obj,index) => {
-                        return <div key={index} className="border border-blue-300 mr-1 mb-1 mt-1 px-1 rounded-md">{obj}</div>
+                        return <div key={index} className="border font-light rounded-md border-black mr-1 mb-1 mt-1 px-1">{obj}</div>
                     })
                 : null}
             </div>
@@ -200,7 +201,7 @@ const PreviewComponent = ({data,tags,edit,title}) => {
                                 key={index+5}
                                 language="javascript" 
                                 style={atomOneDarkReasonable} 
-                                className="w-96 rounded-sm">{obj.code}</SyntaxHighlighter>
+                                className="w-max rounded-sm">{obj.code}</SyntaxHighlighter>
                             case "heading":
                                 switch(obj.level) {
                                     case 1:
@@ -222,8 +223,9 @@ const PreviewComponent = ({data,tags,edit,title}) => {
                 </div>
             : null
             }
-            <button className="border-blue-300 border hover:bg-blue-200 mt-2 px-2 rounded-sm text-xl" onClick={() => edit(false)}>Edit</button>
         </div>
+        <button className="hover:text-blue-600 font-bold w-12 self-center my-2 pb-2" onClick={() => edit(false)}>Edit</button>
+        </>
     )
 };
 

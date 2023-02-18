@@ -17,10 +17,12 @@
     margin: 0;
     padding: 0;
     }
-    body {
-    position: relative;
-    background: #F5F5F5;
-    } 
+    html, body {
+        position: relative;
+        background: #F5F5F5;
+        height:100%;
+
+    }
     .overlay {
         position: absolute;
         min-height: 100vh;
@@ -39,16 +41,37 @@
     [contenteditable]:focus {
         outline: 0px solid transparent;
     }
-    .navbar {
+    /* .navbar {
         height: 5vh;
+    } */
+    .standard-width {
+        width: 60%;
     }
     .wrapper {
-        height: 94vh;
+        height: 90vh;
     }
+    .textareaheight {
+        height: 82%;
+        width: 100%;
+    }
+    .textareaheight::-webkit-scrollbar {
+        /* display: none; */
+        width: 2.5px;
+        background-color: white;
+    }
+    .textareaheight::-webkit-scrollbar-thumb {
+        background-color: black;
+    }   
+
     .profile-picture {
         border-radius: 50%
     }
     .file-upload {
         display: none
     }
-}   
+}
+@layer components {
+    .custom-button {
+        @apply text-black px-2 rounded-md border-black border font-light h-8 transition ease-in-out duration-150 hover:text-blue-600 hover:border-blue-600
+    }
+}

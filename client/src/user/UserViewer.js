@@ -28,20 +28,21 @@ const UserViewer = ({user}) => {
     return (
         <div>
             { viewUser ? 
-                <div className="bg-gray-100 rounded-md m-4 flex-col flex items-center p-4">
-                    <GetImage classes="profile-picture h-32" image={viewUser.profile_picture}/>
+                <div className="bg-white rounded-md m-4 flex-col flex items-center p-4 border ">
+                    <GetImage classes="profile-picture h-32 w-32" image={viewUser.profile_picture}/>
                     
                     <div className="text-2xl font-bold">{viewUser.username}</div>
                     { viewUser.description ? <div>{viewUser.description}</div> : null}
-                    { (user && user._id === id) ? <button onClick={redirectToSettings} className="bg-gray-300 px-2 rounded-md">Edit profile</button> : null }
+                    { (user && user._id === id) ? <button onClick={redirectToSettings} className="custom-button h-6">Edit profile</button> : null }
                 </div>
                 
                 : null
             }
             { posts ?
-                <div>
+                <div className="flex flex-col">
+                    <div className="self-center text-xl font-bold">Posts</div>
                     { posts.map((obj,index) => {
-                        return <BlogCard blog={obj} key={index} user={user}/>
+                        return <BlogCard classes="mx-4" blog={obj} key={index} user={user}/>
                     })}
                 </div>
                 : null

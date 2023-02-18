@@ -11,9 +11,9 @@ export const UserBubble = ({user,time}) => {
            {
                user ? 
                 <div className="flex" onClick={goToUser}>
-                    <GetImage image={user.profile_picture} classes="h-8 profile-picture hover:ring-1 hover:ring-green-400"/>
+                    <GetImage image={user.profile_picture} classes="h-8 w-8 profile-picture"/>
                     <div className="flex flex-col">
-                        <div className="ml-1 text-sm font-light hover:text-green-400">{user.username ? user.username : user.email}</div>
+                        <div className="ml-1 text-sm font-light hover:text-blue-600">{user.username ? user.username : user.email}</div>
                         { time ? <div className="ml-1 text-xs font-thin">{time}</div> : null }
                     </div>
 
