@@ -3,9 +3,9 @@ import axios from 'axios'
 import GetImage from "../hooks/GetImage"
 
 const UserSettings = ({user}) => {
-    const [File, setFile] = useState(null)
+    const [File, setFile] = useState()
 
-    const [username,setUsername] = useState(user.username)
+    const [username,setUsername] = useState(user.username || user.email)
     const [bio,setBio] = useState(user.description)
 
 
@@ -15,18 +15,18 @@ const UserSettings = ({user}) => {
 
     const uploadImage = async () => {
         return new Promise(async (resolve,reject) => {
-            if (!File) return;
+            if (File === undefined) { return reject("No file"); }
             const form = new FormData();
             form.append("image", File);
             await axios.post("http://localhost:3001/api/image/upload",form, {withCredentials: true})
-            .then(data => {resolve(data.data)})
-            .catch(error => reject(error))
+            .then(data => {return resolve(data.data)})
+            .catch(error => {return reject(error)})
         })
     }
 
     const saveAndRedirect = async (e) => {
         e.preventDefault()
-        let key;
+        let key = undefined;
         await uploadImage()
         .then(out => {key = out})
         .catch(err => console.log("Messed up uploading"))
@@ -39,20 +39,20 @@ const UserSettings = ({user}) => {
     }
 
     return (
-        <div>
-            <div className="flex items-center">
+        <div className="flex flex-col mt-4">
+            <div className="flex flex-col items-center">
                 <GetImage classes={"profile-picture max-h-24 w-24"} image={user.profile_picture}/>
                 <input onChange={onFileChange} type="file"></input>
             </div>
-            <div className="flex">
-                <div>Username</div>
-                <input className="bg-gray-300" type="text" defaultValue={username} onChange={(e) => setUsername(e.target.value)}></input>
+            <div className="flex flex-col items-center">
+                <div className="font-light text-xl">Username</div>
+                <input className="bg-white border  rounded-md px-2 w-2/4" type="text" defaultValue={username} onChange={(e) => setUsername(e.target.value)}></input>
             </div>
-            <div className="flex">
-                <div>Description</div>
-                <textarea className="bg-gray-300 w-2/4 h-32" value={bio} onChange={(e) => setBio(e.target.value)}></textarea>
+            <div className="flex flex-col items-center">
+                <div className="font-light text-xl">Description</div>
+                <textarea spellCheck={false} className="bg-white border rounded-md px-2 w-2/4 h-32" value={bio} onChange={(e) => setBio(e.target.value)}></textarea>
             </div>
-            <button className="bg-cyan-200 rounded-sm px-1 " onClick={saveAndRedirect}>Save Changes</button>
+            <button className="custom-button w-32 mt-2 self-center" onClick={saveAndRedirect}>Save Changes</button>
         </div>
     )
 };

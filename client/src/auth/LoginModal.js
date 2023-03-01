@@ -26,12 +26,9 @@ function LoginModal(props) {
     }
     return (
         <div className="overlay">
-            <div className="modalContainer rounded-md transition-shadow bg-gray-300 flex-col w-1/2 h-1/2">
+            <div className="modalContainer rounded-md transition-shadow bg-white flex flex-col w-1/2 h-1/6 items-center">
                 <div className="self-end">
-                    <button onClick={() => logModal(false)}>X</button>
-                </div>
-                <div className="login">
-                    <h1>Login</h1>
+                    <button className="font-thin mr-1" onClick={() => logModal(false)}>X</button>
                 </div>
                 <GoogleAuth/>
                 {/* <form onSubmit={handleSubmit}>

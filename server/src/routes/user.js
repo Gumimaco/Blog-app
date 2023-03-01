@@ -17,7 +17,15 @@ router.get('/:id', async (req,res) => {
 
 router.put('/change-settings',is_authenticated, async (req,res) => {
     const {key,username,bio} = req.body
-    await User.updateOne({id: req.user.id},{$set: {profile_picture: key,username,description: bio}})
+    if (key !== undefined && key !== req.user.profile_picture) {
+        await User.updateOne({id: req.user.id},{$set: {profile_picture: key}})
+    }
+    if (username !== req.user.username) {
+        await User.updateOne({id: req.user.id},{$set: {username}})
+    }
+    if (bio !== req.user.description) {
+        await User.updateOne({id: req.user.id},{$set: {description: bio}})
+    }
     res.sendStatus(201)
 })
 
