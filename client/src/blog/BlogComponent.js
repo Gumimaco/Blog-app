@@ -171,7 +171,6 @@ const BlogComponent = ({data,tags,edit,title}) => {
 
     useEffect(() => {
         setParsed(getFinal(data + '\n'))
-        console.log(parsed)
     },[])
 
     return (
@@ -188,7 +187,6 @@ const BlogComponent = ({data,tags,edit,title}) => {
                 { parsed ? 
                     <div> {
                         parsed.map((obj,index) => {
-                            console.log(obj)
                             switch(obj.type) {
                                 case "text":
                                     return <p key={index+5}>{obj.text}</p>

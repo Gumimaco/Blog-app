@@ -12,6 +12,7 @@ const authRoute = require('./routes/auth')
 const blogRoute = require('./routes/blog')
 const imageRoute = require('./routes/image')
 const userRoute = require('./routes/user')
+const commentRoute = require('./routes/comment')
 
 
 const PORT = 3001
@@ -40,7 +41,7 @@ app.use('/api/auth',authRoute)
 app.use('/api/blog',blogRoute)
 app.use('/api/image',imageRoute)
 app.use('/api/user',userRoute)
-
+app.use('/api/comment',commentRoute)
 
 
 app.listen(PORT,() => {

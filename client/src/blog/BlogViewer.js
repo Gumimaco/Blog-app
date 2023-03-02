@@ -2,7 +2,7 @@ import React,{useState,useEffect} from "react"
 import { useParams } from "react-router-dom";
 import axios from 'axios'
 import BlogComponent from "./BlogComponent";
-
+import CommentSection from "../comments/CommentSection"
 
 const BlogViewer = ({user}) => {
     const {blog_id} = useParams()
@@ -17,7 +17,12 @@ const BlogViewer = ({user}) => {
 
     return (
         <div>
-            {blog ? <BlogComponent data={blog.content} tags={blog.tags} title={blog.title} />: null}
+            {blog ? 
+                <>
+                <BlogComponent data={blog.content} tags={blog.tags} title={blog.title} />
+                <CommentSection blog={blog} comments={blog.comments}/>
+                </>
+                : null}
         </div>
     )
 };

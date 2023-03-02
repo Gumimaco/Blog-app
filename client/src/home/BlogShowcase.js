@@ -1,16 +1,56 @@
-import React,{useState,useEffect} from "react"
+import React,{useState,useEffect,useRef} from "react"
 import BlogCard from '../blog/BlogCard'
 import axios from 'axios'
 
+
 const BlogShowcase = () => {
     const [blogs,setBlogs] = useState([])
+    const [page,setPage] = useState(1)
+    const [lastElement, setLastElement] = useState(null);
 
+    // useEffect(() => {
+    //     axios.get('http://localhost:3001/api/blog/last-posts')
+    //     .then(data => setBlogs(data.data))
+    //     .catch(err => console.log(err))
+    // },[blogs])
 
+    const observer = useRef(
+        new IntersectionObserver(
+            (entries) => {
+                console.log("IN OBSERVER",entries)
+                const first = entries[0];
+                if (first.isIntersecting) {
+                    setPage((n) => n + 1);
+                }
+            })
+    );
+    
+    const getBlogs = async () => {
+        let response = await axios.get(
+            `http://localhost:3001/api/blog/last-posts/${page}`
+        );
+        console.log(response.data)
+        blogs !== [] ? setBlogs(prev => [...prev,...response.data]) : setBlogs([response.data])
+    };
+    
     useEffect(() => {
-        axios.get('http://localhost:3001/api/blog/last-posts')
-        .then(data => setBlogs(data.data))
-        .catch(err => console.log(err))
-    },[blogs])
+        getBlogs();
+    }, [page]);
+        
+    useEffect(() => {
+        const currentElement = lastElement;
+        const currentObserver = observer.current;
+
+        if (currentElement) {
+            currentObserver.observe(currentElement);
+        }
+
+        return () => {
+            if (currentElement) {
+                currentObserver.unobserve(currentElement);
+            }
+        };
+    }, [lastElement]);
 
     return (
         <div className="mt-2">
@@ -29,7 +69,7 @@ const BlogShowcase = () => {
                 </div>
             </div>
             { blogs ? blogs.map((blog,index) => {
-                    return <BlogCard blog={blog} key={index}/>
+                    return index === blogs.length - 1 ? <div ref={setLastElement}><BlogCard blog={blog} key={index}/></div> : <BlogCard blog={blog} key={index}/>
                 }) : null
             }
         </div>
