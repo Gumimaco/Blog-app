@@ -79,7 +79,7 @@ export default function Createpost() {
                                 :
                                 <>
                                     <div className="bg-white p-4 border rounded-md h-full">
-                                        <input type="text" className="text-4xl  font-bold" placeholder="Title" onChange={e => setTitle(e.target.value)} value={title}></input>
+                                        <input type="text" className="text-4xl  font-bold w-11/12" placeholder="Title" onChange={e => setTitle(e.target.value)} value={title}></input>
                                         <AddTags tags={tags} setTag={setTags}/>
                                         <div>
                                         <input onChange={onFileChange} type="file"></input>

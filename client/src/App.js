@@ -7,7 +7,7 @@ import Createpost from './blogMaker/Createpost';
 import UserSettings from './user/UserSettings';
 import UserViewer from './user/UserViewer';
 import BlogViewer from './blog/BlogViewer';
-
+import { PostsHome } from './posts/PostsHome';
 
 function App() {
     const user = useContext(myUser);
@@ -25,6 +25,7 @@ function App() {
                         </>
                         : null
                     }
+                    <Route path="/posts/*" element={<PostsHome/>}/>
                     <Route path="/user/:id" element={<UserViewer user={user}/>}/>
                     <Route path="/blog/:blog_id" element={<BlogViewer user={user}/>}/>
                 </Routes>

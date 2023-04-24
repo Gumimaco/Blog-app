@@ -1,14 +1,6 @@
 const mongoose = require('mongoose')
 
-const BlogSchema = new mongoose.Schema({
-    title: {
-        type: mongoose.SchemaTypes.String,
-        required: true
-    },
-    c_email: {
-        type: mongoose.SchemaTypes.String,
-        required: true
-    },
+const CommentSchema = new mongoose.Schema({
     creator: {
         type: mongoose.SchemaTypes.String,
         required: true
@@ -23,17 +15,13 @@ const BlogSchema = new mongoose.Schema({
         required: true,
         default: 0
     },
-    tags: {
-        type: [mongoose.SchemaTypes.String],
-        required: true
-    },
     content: {
         type: mongoose.SchemaTypes.String,
         required: true
     },
     comments: {
-        type: [mongoose.SchemaType.String],
+        type: [mongoose.SchemaTypes.String],
         default: []
     }
 })
-module.exports = mongoose.model("blogs",BlogSchema)
+module.exports = mongoose.model("commments",CommentSchema)

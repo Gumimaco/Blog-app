@@ -27,8 +27,9 @@ router.delete('/delete-draft/:id',is_authenticated, async (req,res) => {
     }
 })
 
-router.get('/last-posts',async (req,res) => {
-    const blogs = await Blog.find({}).sort({createdAt: -1})
+router.get('/last-posts/:page',async (req,res) => {
+    const page = (req.params.page - 1) || 0
+    const blogs = (await Blog.find({}).sort({createdAt: -1})).slice(3*page,(3*page)+3)
     res.send(blogs)
 })
 
@@ -61,6 +62,13 @@ router.put('/draft/:id',is_authenticated, async (req,res) => {
         await Draft.updateOne({_id: draft_id, creator: req.user.id},{$set: {title: title,content: textArea,tags: tags}})
         res.sendStatus(201)
     }
+})
+
+router.get('/byTitle/:title/:page',async (req,res) => {
+    const title = req.params.title || undefined
+    if (title) res.send([])
+    const blogs = await Blog.find({title: {$regex: title} }).sort({createdAt: -1})
+    res.send(blogs)
 })
 
 router.get('/:id', async (req,res) => {
