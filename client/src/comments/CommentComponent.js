@@ -42,7 +42,7 @@ function CommentComponent({ commentId, margin, blogId }) {
   };
 
   return (
-    <div className={`flex flex-col ml-[${margin}rem]`}>
+    <div className={`flex flex-col mt-1`}>
       <div className="flex justify-between">
         <div className="bg-gray-200 m-2 w-full">
           <div className="flex">
