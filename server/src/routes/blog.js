@@ -94,9 +94,14 @@ router.get("/:id", async (req, res) => {
   console.log(blog);
   res.send(blog);
 });
-router.get("/userblogs/:id", async (req, res) => {
-  const { id } = req.params;
-  const blogs = await Blog.find({ creator: id });
+// router.get("/userblogs/:id", async (req, res) => {
+//   const { id } = req.params;
+//   const blogs = await Blog.find({ creator: id });
+//   res.send(blogs);
+// });
+router.get("/userblogs/:email", async (req, res) => {
+  const { email } = req.params;
+  const blogs = await Blog.find({ c_email: email });
   res.send(blogs);
 });
 

@@ -8,6 +8,7 @@ import UserSettings from "./user/UserSettings";
 import UserViewer from "./user/UserViewer";
 import BlogViewer from "./blog/BlogViewer";
 import { PostsHome } from "./posts/PostsHome";
+import { Admin } from "./admin/Admin";
 
 function App() {
   const user = useContext(myUser);
@@ -31,7 +32,7 @@ function App() {
           <Route path="/user/:id" element={<UserViewer user={user} />} />
           <Route path="/blog/:blog_id" element={<BlogViewer user={user} />} />
           {user && user.isAdmin ? (
-            <Route path="/admin" element={<div>ADMIN LOGGED</div>} />
+            <Route path="/admin" element={<Admin></Admin>} />
           ) : null}
         </Routes>
       </BrowserRouter>

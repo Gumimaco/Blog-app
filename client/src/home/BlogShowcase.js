@@ -7,12 +7,6 @@ const BlogShowcase = () => {
   const [page, setPage] = useState(1);
   const [lastElement, setLastElement] = useState(null);
 
-  // useEffect(() => {
-  //     axios.get('http://localhost:3001/api/blog/last-posts')
-  //     .then(data => setBlogs(data.data))
-  //     .catch(err => console.log(err))
-  // },[blogs])
-
   const observer = useRef(
     new IntersectionObserver((entries) => {
       console.log("IN OBSERVER", entries);

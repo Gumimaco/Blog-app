@@ -16,8 +16,9 @@ const UserViewer = ({ user }) => {
       .catch((err) => console.log("ERROR"));
 
     if (user) {
+      console.log(user);
       axios
-        .get(`http://localhost:3001/api/blog/userblogs/${user._id}`, {
+        .get(`http://localhost:3001/api/blog/userblogs/${user.email}`, {
           withCredentials: true,
         })
         .then((data) => setPosts(data.data))
