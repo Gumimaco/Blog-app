@@ -8,7 +8,6 @@ const BlogViewer = ({ user }) => {
   const { blog_id } = useParams();
   const [blog, setBlog] = useState();
 
-  const commentMade = () => {};
   useEffect(() => {
     axios
       .get(`http://localhost:3001/api/blog/${blog_id}`, {
