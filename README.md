@@ -5,7 +5,7 @@ using DigitalOcean as image storing solution with Oath2 for google auth.
 </br >
 DEMO VIDEO
 </br >
-(https://img.youtube.com/vi/wt3Ss1FM8io/0.jpg)(https://www.youtube.com/watch?v=wt3Ss1FM8io)
+[![DEMO](https://img.youtube.com/vi/wt3Ss1FM8io/0.jpg)](https://www.youtube.com/watch?v=wt3Ss1FM8io)
 </br>
 #STACK
 ReactJS, NodeJS, Express, Tailwind, MongoDB, Oath2, DigitalOcean Spaces
