@@ -3,9 +3,7 @@ Website very similar one to Dev.To with its own parser of custom blog post with 
 using DigitalOcean as image storing solution with Oath2 for google auth.
 
 </br >
-DEMO VIDEO
-</br >
-[![Watch the video](https://img.youtube.com/vi/wt3Ss1FM8io/0.jpg)](https://www.youtube.com/watch?v=wt3Ss1FM8io)
+DEMO VIDEO: https://www.youtube.com/watch?v=wt3Ss1FM8io
 </br>
 #STACK
 ReactJS, NodeJS, Express, Tailwind, MongoDB, Oath2, DigitalOcean Spaces
